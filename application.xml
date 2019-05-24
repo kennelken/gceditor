@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/21.0">
+  <id>ru.kennel32.gceditor</id>
+  <versionNumber>1.0.8</versionNumber>
+  <filename>gceditor</filename>
+  <name>gceditor</name>
+  <initialWindow>
+    <title>gceditor</title>
+    <content>gceditor.swf</content>
+    <systemChrome>standard</systemChrome>
+    <transparent>false</transparent>
+    <visible>true</visible>
+    <minimizable>true</minimizable>
+    <maximizable>true</maximizable>
+    <resizable>true</resizable>
+    <width>1400</width>
+    <height>1000</height>
+    <minSize>1000 650</minSize>
+  </initialWindow>
+  <!-- 
+	More options:
+	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
+	-->
+  <icon>
+    <image512x512>icons/icon512.png</image512x512>
+    <image1024x1024>icons/icon1024.png</image1024x1024>
+    <image16x16>icons/icon16.png</image16x16>
+    <image32x32>icons/icon32.png</image32x32>
+    <image48x48>icons/icon48.png</image48x48>
+    <image128x128>icons/icon128.png</image128x128>
+  </icon>
+  <android>
+    <manifestAdditions><![CDATA[<manifest android:installLocation="auto" xmlns:android="http://schemas.android.com/apk/res/android" />]]></manifestAdditions>
+  </android>
+  <supportedProfiles>desktop extendedDesktop</supportedProfiles>
+</application>
