@@ -16,6 +16,11 @@ package ru.kennel32.editor.data.utils
 		public static const ID_INDEX:int = 0;
 		public static const INNER_TABLE_SKIP_ID:int = 1;
 		
+		public static const FORBIDDEN_TAGS:Object = {
+			'meta': true,
+			'rows': true
+		};
+		
 		public static function isSystemMeta(meta:TableMeta):Boolean
 		{
 			return meta.id <= Counter.PROJECT_SETTINGS;

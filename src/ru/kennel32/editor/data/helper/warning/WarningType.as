@@ -4,6 +4,7 @@ package ru.kennel32.editor.data.helper.warning
 	{
 		public static const CHECKING_EXCEPTION:WarningType		= new WarningType("check exception", WarningLevel.ERROR);
 		public static const MISSING_REFERENCE:WarningType		= new WarningType("missing reference", WarningLevel.ERROR);
+		public static const FORBIDDEN_TAG:WarningType			= new WarningType("forbidden tag", WarningLevel.ERROR);
 		public static const MISSING_TAG:WarningType				= new WarningType("missing tag", WarningLevel.WARNING);
 		public static const DUPLICATING_TAG:WarningType			= new WarningType("duplicating tag", WarningLevel.WARNING);
 		public static const EMPTY_REFERENCE:WarningType			= new WarningType("empty reference", WarningLevel.WARNING);
@@ -15,6 +16,7 @@ package ru.kennel32.editor.data.helper.warning
 		public static const ALL:Vector.<WarningType> = Vector.<WarningType>([
 			CHECKING_EXCEPTION,
 			MISSING_REFERENCE,
+			FORBIDDEN_TAG,
 			MISSING_TAG,
 			DUPLICATING_TAG,
 			EMPTY_REFERENCE,

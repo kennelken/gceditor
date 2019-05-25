@@ -1,6 +1,8 @@
 package ru.kennel32.editor.data.serialize
 {
 	import ru.kennel32.editor.Main;
+	import ru.kennel32.editor.data.table.BaseTable;
+	import ru.kennel32.editor.data.table.ContainerTable;
 	import ru.kennel32.editor.data.table.Counter;
 	import ru.kennel32.editor.data.table.DataTable;
 	import ru.kennel32.editor.data.table.TableColumnDescription;
@@ -37,10 +39,22 @@ package ru.kennel32.editor.data.serialize
 			}
 		}
 		
+		override protected function addChildrenTables(containerTable:ContainerTable, res:Object):void 
+		{
+			for each (var child:BaseTable in containerTable.children)
+			{
+				if (child.meta.tag != null && child.meta.tag != '')
+				{
+					addProp(res, child.meta.tag, serializeTableBody(child));
+				}
+			}
+		}
+		
 		override protected function newNode():Object 
 		{
 			return new Object();
 		}
+		
 		override protected function addProp(obj:Object, prop:String, value:Object, isRequired:Boolean = false):void 
 		{
 			if (!isRequired && isDefaultValue(value))
@@ -116,6 +130,27 @@ package ru.kennel32.editor.data.serialize
 		override protected function convertToMap(src:Object):Object 
 		{
 			return src;
+		}
+		
+		override protected function deserializeChildren(srcMap:Object, containerTable:ContainerTable, result:Vector.<BaseTable>):Vector.<BaseTable>
+		{
+			var i:int = 0;
+			for (var prop:String in srcMap)
+			{
+				if (prop == 'rows' || prop == 'meta')
+				{
+					continue;
+				}
+				
+				var child:Object = srcMap[prop];
+				var childTable:BaseTable = deserializeTableBody(child, containerTable);
+				childTable.index = i;
+				result.push(childTable);
+				
+				i++;
+			}
+			
+			return result;
 		}
 	}
 }

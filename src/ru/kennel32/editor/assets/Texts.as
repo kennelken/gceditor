@@ -781,6 +781,9 @@ package ru.kennel32.editor.assets
 				
 				case WarningType.MISSING_USE_AS_NAME:
 					return "Missing name columns";
+				
+				case WarningType.FORBIDDEN_TAG:
+					return "Forbidden tag";
 			}
 			return "Validation error";
 		}

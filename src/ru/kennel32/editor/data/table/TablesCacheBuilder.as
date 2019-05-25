@@ -354,6 +354,11 @@ package ru.kennel32.editor.data.table
 		{
 			try
 			{
+				if (Hardcode.FORBIDDEN_TAGS[table.meta.tag])
+				{
+					addWarning(new WarningData(WarningType.FORBIDDEN_TAG, table, null, null));
+				}
+				
 				var parentid:int = table.parent == null ? 0 : table.parent.meta.id;
 				if (_cacheTablesTagsByParent[parentid] == null)
 				{

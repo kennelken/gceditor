@@ -67,7 +67,7 @@ package ru.kennel32.editor.data.serialize
 			return "\t";
 		}
 		
-		private function serializeTableBody(src:BaseTable):Object
+		protected function serializeTableBody(src:BaseTable):Object
 		{
 			var res:Object = newNode()
 			
@@ -87,15 +87,20 @@ package ru.kennel32.editor.data.serialize
 			var containerTable:ContainerTable = src as ContainerTable;
 			if (containerTable != null)
 			{
-				var children:Array = [];
-				addProp(res, 'children', children);
-				for each (var child:BaseTable in containerTable.children)
-				{
-					children.push(serializeTableBody(child));
-				}
+				addChildrenTables(containerTable, res);
 			}
 			
 			return res;
+		}
+		
+		protected function addChildrenTables(containerTable:ContainerTable, res:Object):void
+		{
+			var children:Array = [];
+			addProp(res, 'children', children);
+			for each (var child:BaseTable in containerTable.children)
+			{
+				children.push(serializeTableBody(child));
+			}
 		}
 		
 		public function serializeMeta(src:TableMeta):Object
@@ -240,7 +245,7 @@ package ru.kennel32.editor.data.serialize
 			return src;
 		}
 		
-		private function deserializeTableBody(src:Object, parent:ContainerTable):BaseTable
+		protected function deserializeTableBody(src:Object, parent:ContainerTable):BaseTable
 		{
 			var srcMap:Object = convertToMap(src);
 			
@@ -276,21 +281,24 @@ package ru.kennel32.editor.data.serialize
 			var containerTable:ContainerTable = res as ContainerTable;
 			if (containerTable != null)
 			{
-				var children:Vector.<BaseTable> = new Vector.<BaseTable>();
-				
-				var childrenData:Array = srcMap['children'];
-				for (i = 0; i < childrenData.length; i++)
-				{
-					var child:Object = childrenData[i];
-					var childTable:BaseTable = deserializeTableBody(child, containerTable);
-					childTable.index = i;
-					children.push(childTable);
-				}
-				
-				containerTable.addChildren(children);
+				containerTable.addChildren(deserializeChildren(srcMap, containerTable, new Vector.<BaseTable>()));
 			}
 			
 			return res;
+		}
+		
+		protected function deserializeChildren(srcMap:Object, containerTable:ContainerTable, result:Vector.<BaseTable>):Vector.<BaseTable>
+		{
+			var childrenData:Array = srcMap['children'];
+			for (var i:int = 0; i < childrenData.length; i++)
+			{
+				var child:Object = childrenData[i];
+				var childTable:BaseTable = deserializeTableBody(child, containerTable);
+				childTable.index = i;
+				result.push(childTable);
+			}
+			
+			return result;
 		}
 		
 		private function buildInnerTablesMetaCache(src:Object, cache:Object):Object
