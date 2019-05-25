@@ -83,7 +83,7 @@ package ru.kennel32.editor.view.forms.dialog.content
 			else
 			{
 				_description = TableColumnDescription.create(TableColumnDescriptionType.INT_VALUE, "newColumnTag", false, 0, false);
-				_description.name = "new column";
+				_description.name = "newColumn";
 				_description.description = "new column\ndescription";
 				_description.defaultValue = TableColumnDescription.getDefaultValue(int(_description.type));
 			}
