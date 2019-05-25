@@ -1,5 +1,6 @@
 # gceditor
 ![](https://lh3.googleusercontent.com/SMTg3mBfDII93jpm2JGY_hIREmpwtiH7ds9XZHayvUb76m4ynBAoX6ecBMd9O7zTy4O5imbD1CPdjUB4rOcx=w2560-h1297)
+
 ### Description
 The application allows you to create and edit json-formatted config file in a table-like way. It is designed to solve common game configuring tasks like adding entities, references to entities, parameters, localization; advanced search, integrity validation.
 
@@ -42,6 +43,7 @@ Written in Actionscript 3.0. Requires Adobe Air to launch.
 
 ### JSON Example
 [JSON default](https://pastebin.com/SRJSFrTS "JSON default") - Default format including all data and metadata. **Can** be loaded in the application.
+
 [JSON reduced](https://pastebin.com/KpFwXRws "JSON reduced") - Reduced format for more convinient representation. **Can not** be loaded in the application. This format is much easier to parse in a game.
 
 ### Installation
