@@ -1,5 +1,5 @@
 # gceditor
-![](https://lh3.googleusercontent.com/SMTg3mBfDII93jpm2JGY_hIREmpwtiH7ds9XZHayvUb76m4ynBAoX6ecBMd9O7zTy4O5imbD1CPdjUB4rOcx=w2560-h1297)
+![](https://drive.google.com/uc?id=1Nc74z_4mMUv8VsqA6jK7CBlK9rG3IID-)
 
 ### Description
 The application allows you to create and edit json-formatted config file in a table-like way. It is designed to solve common game configuring tasks like adding entities, references to entities, parameters, localization; advanced search, integrity validation.
@@ -31,20 +31,20 @@ Written in Actionscript 3.0. Requires Adobe Air to launch.
 - it is easy to integrate custom serializer using source code;
 
 ### Screenshots
-![](https://lh5.googleusercontent.com/TQQmnbYF2L4TuYI82iYaov0beD89MVUqWu4HcEnK3CW2udiwmYGAXezdmDHF1e5Es_5S7MhZT04x_O3kjJD-=w2560-h1297-rw)
+![](https://drive.google.com/uc?id=1wS3XA9oId6ucexzDAICvmZ3jMZaE9ON2)
 
-![](https://lh4.googleusercontent.com/GI2HhCTmhS05xs6ppQNq7Rd3rWvpB4yW2zEFQIM8HStv40qNU_dxr0qUkhpKzlDlfwFJBJcIeDTaEouVMLxI=w2560-h1297-rw)
+![](https://drive.google.com/uc?id=1uZi_lh9pFZ3JAmuoSY3xsZpNz33qaf1r)
 
-![](https://lh3.googleusercontent.com/07fnURMsFPJt7hAHBcNCLu15M-23upBk9FBhvrZLO1NBN_OTtUBiGo52AChCPeTgxu_t4T7mQ-Fys1skIsAz=w2560-h1297-rw)
+![](https://drive.google.com/uc?id=1eOE7Ek1-83OaU-5Ir-gU-bMCBw2XcFLb)
 
-![](https://lh4.googleusercontent.com/W36N81WEyISGTexa_8hZlpNbj3eN-sXRZ--A9YVXXIb8YYacs495KNaIczvYrRstAXjoPUZNA_NF02jEu5au=w2560-h1297-rw)
+![](https://drive.google.com/uc?id=1CYVdYC_2HCLCFG1wf0C22tIsSjN29IQ7)
 
-![](https://lh3.googleusercontent.com/slKNAValPy-i3CgTl3QJ1xzB_7ieCfiQdCCBCyMEKHoEgEq16gAXj1A7mSZPMtO2JulQGLVp_rSSRjdZWumN=w2560-h1297-rw)
+![](https://drive.google.com/uc?id=1sBOv8-iN0jmUm2uKWUFFOiHd0bZYyFFx)
 
 ### JSON Example
-[JSON default](https://pastebin.com/SRJSFrTS "JSON default") - Default format including all data and metadata. **Can** be loaded in the application.
+[JSON default](https://drive.google.com/uc?id=1nUc1fe0_dyHphsCbIUKmLuoCKJpxI6PO "JSON default") - Default format including all data and metadata. **Can** be loaded in the application.
 
-[JSON reduced](https://pastebin.com/KpFwXRws "JSON reduced") - Reduced format for more convinient representation. **Can not** be loaded in the application. This format is much easier to parse in a game.
+[JSON reduced](https://drive.google.com/uc?id=1bOCDCkuvJi2r7bkECmK-NNa_f2fY-szu "JSON reduced") - Reduced format for more convinient representation. **Can not** be loaded in the application. This format is much easier to parse in a game.
 
 ### Installation
 Execute air/gceditor.air file to install the application. Windows and macOs are supported.
