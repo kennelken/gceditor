@@ -9,6 +9,7 @@ package ru.kennel32.editor.data.serialize
 	import ru.kennel32.editor.data.table.TableColumnDescriptionType;
 	import ru.kennel32.editor.data.table.TableMeta;
 	import ru.kennel32.editor.data.table.TableRow;
+	import ru.kennel32.editor.data.utils.Hardcode;
 	import ru.kennel32.editor.data.utils.ParseUtils;
 	
 	public class JsonAssociativeSerializer extends JsonIndexedBeautifiedSerializer
@@ -80,11 +81,30 @@ package ru.kennel32.editor.data.serialize
 				if (column.type == TableColumnDescriptionType.INNER_TABLE)
 				{
 					var table:DataTable = Main.instance.rootTable.cache.getTableById(column.metaId) as DataTable;
-					res[column.tag] = table == null ? '' : ParseUtils.writeInnerTable(src.data[i], table.meta.columns);
+					res[column.tag] = table == null ? '' : serializeInnerTableCell(src.data[i], table.meta.columns);
 				}
 				else
 				{
 					res[column.tag] = ParseUtils.writeValue(src.data[i], column.type);
+				}
+			}
+			
+			return res;
+		}
+		
+		private function serializeInnerTableCell(data:Vector.<Array>, columns:Vector.<TableColumnDescription>):Array
+		{
+			var res:Array = new Array();
+			
+			for each (var row:Array in data)
+			{
+				var resRow:Object = new Object();
+				res.push(resRow);
+				
+				for (var i:int = 0; i < row.length; i++)
+				{
+					var column:TableColumnDescription = columns[i + Hardcode.INNER_TABLE_SKIP_ID];
+					resRow[column.tag] = ParseUtils.writeValue(row[i], column.type);
 				}
 			}
 			
@@ -108,7 +128,7 @@ package ru.kennel32.editor.data.serialize
 							var meta:TableMeta = _cacheInnerTablesMeta[column.metaId];
 							if (meta != null)
 							{
-								res.data[i] = ParseUtils.readInnerTable(src[tag], meta.columns);
+								res.data[i] = deserializeInnerTableCell(src[tag], meta.columns);
 							}
 							else
 							{
@@ -121,6 +141,24 @@ package ru.kennel32.editor.data.serialize
 						}
 						break;
 					}
+				}
+			}
+			
+			return res;
+		}
+		
+		private function deserializeInnerTableCell(src:Array, columns:Vector.<TableColumnDescription>):Vector.<Array>
+		{
+			var res:Vector.<Array> = new Vector.<Array>();
+			
+			for each (var row:Object in src)
+			{
+				var resRow:Array = new Array();
+				for (var i:int = Hardcode.INNER_TABLE_SKIP_ID; i < src.length; i++)
+				{
+					var column:TableColumnDescription = columns[i];
+					var savedValue:String = row[column.tag];
+					resRow.push(savedValue != null ? savedValue : "");
 				}
 			}
 			
