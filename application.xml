@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/21.0">
   <id>ru.kennel32.gceditor</id>
-  <versionNumber>1.0.8</versionNumber>
+  <versionNumber>1.1.0</versionNumber>
   <filename>gceditor</filename>
   <name>gceditor</name>
   <initialWindow>
