@@ -154,11 +154,13 @@ package ru.kennel32.editor.data.serialize
 			for each (var row:Object in src)
 			{
 				var resRow:Array = new Array();
-				for (var i:int = Hardcode.INNER_TABLE_SKIP_ID; i < src.length; i++)
+				res.push(resRow);
+				
+				for (var i:int = Hardcode.INNER_TABLE_SKIP_ID; i < columns.length; i++)
 				{
 					var column:TableColumnDescription = columns[i];
 					var savedValue:String = row[column.tag];
-					resRow.push(savedValue != null ? savedValue : "");
+					resRow.push(ParseUtils.readValue(savedValue, column.type));
 				}
 			}
 			
@@ -170,25 +172,48 @@ package ru.kennel32.editor.data.serialize
 			return src;
 		}
 		
-		override protected function deserializeChildren(srcMap:Object, containerTable:ContainerTable, result:Vector.<BaseTable>):Vector.<BaseTable>
+		override protected function getChildrenTablesMap(srcMap:Object):Object
 		{
-			var i:int = 0;
+			var res:Object = new Object();
 			for (var prop:String in srcMap)
 			{
-				if (prop == 'rows' || prop == 'meta')
+				if (isSystemTag(prop))
 				{
 					continue;
 				}
 				
+				res[prop] = srcMap[prop];
+			}
+			return res;
+		}
+		
+		private function isSystemTag(tag:String):Boolean
+		{
+			return tag == 'rows' || tag == 'meta';
+		}
+		
+		override protected function deserializeChildren(srcMap:Object, containerTable:ContainerTable, result:Vector.<BaseTable>):Vector.<BaseTable>
+		{
+			for (var prop:String in srcMap)
+			{
 				var child:Object = srcMap[prop];
 				var childTable:BaseTable = deserializeTableBody(child, containerTable);
-				childTable.index = i;
 				result.push(childTable);
-				
-				i++;
+			}
+			
+			//must restore child tables order
+			result = result.sort(sortTablesById);
+			for (var i:int = 0; i < result.length; i++)
+			{
+				result[i].index = i;
 			}
 			
 			return result;
+		}
+		
+		private function sortTablesById(a:BaseTable, b:BaseTable):int
+		{
+			return a.meta.id > b.meta.id ? 1 : -1;
 		}
 	}
 }

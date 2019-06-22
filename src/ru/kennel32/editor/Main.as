@@ -440,7 +440,7 @@ package ru.kennel32.editor
 		{
 			var cacheRawDataByBasicType:Object = new Object();
 			
-			var deserializableTypes:Vector.<int> = SerializerType.ALL_DESERIALIZABLE;
+			var deserializableTypes:Vector.<int> = SerializerType.ALL;
 			var off:int = Math.max(0, deserializableTypes.indexOf(Settings.exportSettings.entries[0].serializerType));
 			for (var i:int = 0; i < deserializableTypes.length; i++)
 			{

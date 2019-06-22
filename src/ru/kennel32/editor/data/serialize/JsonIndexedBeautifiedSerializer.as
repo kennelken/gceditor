@@ -12,6 +12,7 @@ package ru.kennel32.editor.data.serialize
 	import ru.kennel32.editor.data.table.TableType;
 	import ru.kennel32.editor.data.serialize.ITableSerializer;
 	import ru.kennel32.editor.data.utils.Hardcode;
+	import ru.kennel32.editor.data.utils.ObjectUtils;
 	import ru.kennel32.editor.data.utils.ParseUtils;
 	
 	public class JsonIndexedBeautifiedSerializer implements ITableSerializer
@@ -281,7 +282,7 @@ package ru.kennel32.editor.data.serialize
 			var containerTable:ContainerTable = res as ContainerTable;
 			if (containerTable != null)
 			{
-				containerTable.addChildren(deserializeChildren(srcMap, containerTable, new Vector.<BaseTable>()));
+				containerTable.addChildren(deserializeChildren(getChildrenTablesMap(srcMap), containerTable, new Vector.<BaseTable>()));
 			}
 			
 			return res;
@@ -289,7 +290,7 @@ package ru.kennel32.editor.data.serialize
 		
 		protected function deserializeChildren(srcMap:Object, containerTable:ContainerTable, result:Vector.<BaseTable>):Vector.<BaseTable>
 		{
-			var childrenData:Array = srcMap['children'];
+			var childrenData:Array = srcMap as Array;
 			for (var i:int = 0; i < childrenData.length; i++)
 			{
 				var child:Object = childrenData[i];
@@ -301,9 +302,13 @@ package ru.kennel32.editor.data.serialize
 			return result;
 		}
 		
-		private function buildInnerTablesMetaCache(src:Object, cache:Object):Object
+		protected function buildInnerTablesMetaCache(src:Object, cache:Object):Object
 		{
 			var srcMap:Object = convertToMap(src);
+			if (ObjectUtils.isPrimitive(srcMap) || srcMap.hasOwnProperty('length') || srcMap['meta'] == null)
+			{
+				return cache;
+			}
 			
 			var meta:TableMeta = deserializeMeta(srcMap['meta']);
 			
@@ -312,13 +317,18 @@ package ru.kennel32.editor.data.serialize
 				cache[meta.id] = meta;
 			}
 			
-			var childrenData:Array = srcMap['children'];
+			var childrenData:Object = getChildrenTablesMap(srcMap);
 			for each (var child:Object in childrenData)
 			{
 				buildInnerTablesMetaCache(child, cache);
 			}
 			
 			return cache;
+		}
+		
+		protected function getChildrenTablesMap(srcMap:Object):Object
+		{
+			return srcMap['children'];
 		}
 		
 		public function deserializeMeta(src:Object):TableMeta

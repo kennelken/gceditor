@@ -2,6 +2,7 @@ package ru.kennel32.editor.data.table.find
 {
 	import flash.utils.Dictionary;
 	import ru.kennel32.editor.Main;
+	import ru.kennel32.editor.data.settings.Settings;
 	import ru.kennel32.editor.data.table.BaseTable;
 	import ru.kennel32.editor.data.table.ContainerTable;
 	import ru.kennel32.editor.data.table.DataTable;
@@ -9,10 +10,7 @@ package ru.kennel32.editor.data.table.find
 	import ru.kennel32.editor.data.table.TableColumnDescriptionType;
 	import ru.kennel32.editor.data.table.TableRow;
 	import ru.kennel32.editor.data.table.TablesCache;
-	import ru.kennel32.editor.data.settings.Settings;
 	import ru.kennel32.editor.data.utils.Hardcode;
-	import ru.kennel32.editor.data.utils.ParseUtils;
-	import ru.kennel32.editor.view.utils.ViewUtils;
 	
 	public class FindResult
 	{
